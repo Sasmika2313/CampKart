@@ -1,0 +1,115 @@
+/* AuthPage.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff0f7 0%, #f8f0ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.auth-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff0f7 0%, #f8f0ff 100%);
+}
+
+.auth-container {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(180, 0, 80, 0.12);
+  max-width: 420px;
+  width: 100%;
+}
+
+.auth-brand {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #d63384;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.5px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 1.75rem;
+}
+
+.form-box h2 {
+  color: #d63384;
+  margin-bottom: 1.25rem;
+  font-size: 1.3rem;
+}
+
+.form-box input {
+  display: block;
+  width: 100%;
+  margin: 0.6rem 0;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1.5px solid #ffc8de;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-box input:focus {
+  border-color: #d63384;
+  box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.1);
+}
+
+.form-box button {
+  display: block;
+  width: 100%;
+  margin-top: 1.1rem;
+  padding: 0.85rem;
+  background: linear-gradient(135deg, #ff69b4, #d63384);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.form-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(214, 51, 132, 0.4);
+}
+
+.switch-link {
+  margin-top: 1.25rem;
+  color: #d63384;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.switch-link:hover {
+  opacity: 0.7;
+}
+
+.error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  margin-bottom: 0.5rem;
+}
