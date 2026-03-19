@@ -3,16 +3,28 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const rateLimit = require('express-rate-limit');
 
 dotenv.config();
 
 const app = express();
 
-// Middleware
+// Security Middleware
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(mongoSanitize());
 
-// ✅ Serve uploaded images as static files
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use('/api', limiter);
+
+// Serve uploaded images as static files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Test route
@@ -35,6 +47,10 @@ mongoose.connect(process.env.MONGO_URI, {
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));
+app.use('/api/payment', require('./routes/payment'));
+app.use('/api/admin', require('./routes/admin'));
+app.use('/api/chat', require('./routes/chat'));
+app.use('/api/orders', require('./routes/orders'));
 
 // Start server
 const PORT = process.env.PORT || 5000;

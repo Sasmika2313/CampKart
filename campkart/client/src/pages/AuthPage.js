@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import './AuthPage.css'; // optional styling
+import API from '../api';
+import './AuthPage.css';
 import { useNavigate } from 'react-router-dom';
 
 const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true); // toggle between login/register
+  const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,17 +20,23 @@ const AuthPage = () => {
   };
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const endpoint = isLogin ? 'login' : 'register';
+    const endpoint = isLogin ? '/auth/login' : '/auth/register';
 
     try {
-      const res = await axios.post(`http://localhost:5000/api/auth/${endpoint}`, formData);
-      localStorage.setItem('campkart-token', res.data.token); // save JWT
-      navigate('/market'); // redirect to marketplace
+      const res = await API.post(endpoint, formData);
+      localStorage.setItem('campkart-token', res.data.token);
+      localStorage.setItem('campkart-refresh-token', res.data.refreshToken);
+      localStorage.setItem('campkart-user', JSON.stringify({
+        _id: res.data._id,
+        name: res.data.name,
+        role: res.data.role
+      }));
+      navigate('/market');
     } catch (err) {
       const msg = err.response?.data?.message || 'Something went wrong';
       setError(msg);
